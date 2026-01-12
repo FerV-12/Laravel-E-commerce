@@ -9,7 +9,7 @@
     </video>
 
     <!-- DARK OVERLAY -->
-    <div class="video-overlay"></div>
+    <!-- <div class="video-overlay"></div> -->
 
 </div>
 
