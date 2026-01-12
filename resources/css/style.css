@@ -1,0 +1,155 @@
+.card {
+    border-radius: 10px;
+}
+
+.card-header {
+    font-size: 0.95rem;
+}
+
+.list-group-item {
+    border: none;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.card-header {
+    font-size: 0.95rem;
+}
+
+.list-group-item {
+    border: none;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+
+.form-check {
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+
+/* Wishlist Page */
+.wishlist-page {
+    background: #f5f5f5;
+}
+
+/* Card */
+.wishlist-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    border: 1px solid #eee;
+}
+
+.wishlist-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Image */
+.wishlist-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+/* Body */
+.wishlist-body {
+    padding: 10px;
+}
+
+.product-name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    height: 36px;
+    overflow: hidden;
+}
+
+.category {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+/* Price */
+.price {
+    color: #ee4d2d;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+/* Actions */
+.wishlist-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.btn-cart {
+    background: #ee4d2d;
+    color: #fff;
+    flex: 1;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.btn-cart:hover {
+    background: #d63f22;
+    color: #fff;
+}
+
+.btn-remove {
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #555;
+    width: 40px;
+}
+
+.btn-remove:hover {
+    background: #f8d7da;
+    color: #842029;
+}
+
+/* Back Button */
+.wishlist-back {
+    border-radius: 50%;
+}
+
+/* Empty State */
+.empty-wishlist {
+    text-align: center;
+    padding: 60px 0;
+    color: #999;
+}
+
+.empty-wishlist i {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
