@@ -40,3 +40,9 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/user.php';
 
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+});
+Route::get('/terms-and-conditions', function () {
+    return view('terms-and-conditions');
+});
