@@ -11,13 +11,13 @@
             <li>
               <i class="fa fa-envelope-o me-1"></i>
               <a href="mailto:goldentigershipping@gmail.com" class="top-nav-link">
-                goldentigershipping@gmail.com
+                FastShoppingStore@gmail.com
               </a>
             </li>
             <li>
               <i class="fa fa-phone me-1"></i>
               <a href="tel:+639102933079" class="top-nav-link">
-                +63 910 293 3079
+                + 63 1234567890
               </a>
             </li>
           </ul>
@@ -44,8 +44,8 @@
 
       <!-- LOGO -->
       <a class="navbar-brand d-flex align-items-center" href="/">
-        <img src="{{ asset('assets/images/GTLOGO.webp') }}" alt="Logo" class="brand-logo">
-        <span class="brand-title">Golden Tiger Shipping Agencies</span>
+        <!-- <img src="{{ asset('assets/images/GTLOGO.webp') }}" alt="Logo" class="brand-logo"> -->
+        <span class="brand-title">Fast Shopping Store</span>
       </a>
 
       <!-- TOGGLER -->
