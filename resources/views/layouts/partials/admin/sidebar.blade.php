@@ -75,12 +75,29 @@
         </div>
     </div>
 
-    <div class="sb-sidenav-footer">
-        <div class="small">Hello there: {{ Auth::user()->name }}</div>
-        @auth
-            <div class="small">Your role is: {{ ucfirst(Auth::user()->role ?? 'user') }}</div>
-        @else
-            <div>Guest</div>
-        @endauth
+    <!-- ✅ Footer with animated GIF & improved text -->
+    <div class="sb-sidenav-footer d-flex align-items-center justify-content-between p-3" style="background-color:#1c1c1c; border-top:1px solid #333;">
+        <div>
+            <div class="small text-light">
+                Hello there, <span class="fw-bold">{{ Auth::user()->name ?? 'Guest' }}</span>!
+            </div>
+            @auth
+                <div class="small text-info" style="font-size:0.85rem;">
+                    <i class="fas fa-user-shield"></i> Your role: <span class="fw-semibold">{{ ucfirst(Auth::user()->role ?? 'user') }}</span>
+                </div>
+            @else
+                <div class="small text-warning" style="font-size:0.85rem;">
+                    <i class="fas fa-user"></i> Guest
+                </div>
+            @endauth
+        </div>
+        <div>
+            <!-- Dancing cat GIF -->
+            <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHB1MzVhcHg2aDljaWIzdHh0NTBseml0MXo2eWdqemFqYmVuZTdiNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CK5gKBdBXdGtVv6AfG/giphy.gif" 
+                 alt="Dancing Cat" 
+                 width="50" 
+                 height="50"
+                 style="border-radius:40%;"/>
+        </div>
     </div>
 </nav>

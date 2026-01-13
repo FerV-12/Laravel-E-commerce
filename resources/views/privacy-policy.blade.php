@@ -65,7 +65,7 @@
         .back-btn {
             display: inline-block;
             padding: 10px 18px;
-            background: #2563eb; /* blue */
+            background: #2563eb;
             color: #ffffff;
             text-decoration: none;
             border-radius: 6px;
@@ -75,7 +75,7 @@
         }
 
         .back-btn:hover {
-            background: #2563eb; /* blue */
+            background: #1d4ed8;
             transform: translateY(-1px);
         }
 
@@ -83,9 +83,29 @@
             margin-top: 30px;
             text-align: center;
         }
+
+        /* ✅ Agreement Style */
+        .agreement {
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* ✅ Disabled Button Style */
+        .back-btn.disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            pointer-events: none;
+            transform: none;
+        }
     </style>
 </head>
 <body>
+
+@php
+    $redirectUrl = Auth::check() && Auth::user()->role === 'admin'
+        ? url('admin/dashboard')
+        : url('user/dashboard');
+@endphp
 
 <div class="container">
     <h1>Privacy Policy</h1>
@@ -149,15 +169,47 @@
         If you have any questions about this Privacy Policy, you may contact us through our support page.
     </p>
 
-    <!-- ✅ Back Button -->
+    <!-- ✅ Agreement + Back Button -->
     <div class="back-wrapper">
-        <a href="admin/dashboard" class="back-btn">← Back to Home</a>
+        <label class="agreement">
+            <input type="checkbox" id="agreeCheckbox">
+            I have read and agree to the Privacy Policy
+        </label>
+
+        <br><br>
+
+        <a 
+            href="{{ $redirectUrl }}"
+            class="back-btn disabled"
+            id="backButton"
+        >
+            ← Back to Home
+        </a>
     </div>
 
     <footer>
         &copy; 2026 Fast Shipping Store. All rights reserved.
     </footer>
 </div>
+
+<!-- ✅ Script -->
+<script>
+    const checkbox = document.getElementById("agreeCheckbox");
+    const backButton = document.getElementById("backButton");
+
+    // disabled by default
+    backButton.style.pointerEvents = "none";
+
+    checkbox.addEventListener("change", function () {
+        if (this.checked) {
+            backButton.classList.remove("disabled");
+            backButton.style.pointerEvents = "auto";
+        } else {
+            backButton.classList.add("disabled");
+            backButton.style.pointerEvents = "none";
+        }
+    });
+</script>
 
 </body>
 </html>
