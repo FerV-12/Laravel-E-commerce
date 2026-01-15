@@ -10,3 +10,8 @@
                         </div>
                     </div>
                 </footer>
+
+{{-- Page specific scripts --}}
+@yield('scripts')
+</body>
+</html>

@@ -67,4 +67,6 @@ Route::prefix('user')
     */
     Route::get('settings', [SettingsController::class, 'index'])->name('settings');
     Route::post('settings/update', [SettingsController::class, 'update'])->name('settings.update');
+
+
 });
