@@ -119,7 +119,7 @@
     <!-- ================= SEARCH & FILTER ================= -->
     <div class="card mb-4 shadow-sm border-0">
         <div class="card-body">
-           <form method="GET">
+           <form method="GET" action="{{ route('user.products.index') }}">
     <div class="row g-2">
         <div class="col-md-7">
             <input type="text" name="search"

@@ -54,12 +54,25 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown"
                 href="#" role="button" data-bs-toggle="dropdown">
-                <i class="fas fa-user fa-fw"></i>
-                {{ Auth::user()->name ?? 'No user' }}
+                 @if(Auth::user()->profile)
+                    <img src="{{ asset('profiles/'.Auth::user()->profile) }}" 
+                         class="rounded-circle" width="30" height="30" alt="Profile Picture"
+                         style="object-fit: cover;">
+                @else
+                    <i class="fas fa-user-circle fa-fw"></i>
+                @endif
+
+
+                
+                
             </a>
 
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li>
+                    <a class="dropdown-item" href="{{route('user.settings')}}">
+                        Profile Settings
+                    </a>
+                </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
@@ -74,5 +87,4 @@
             </ul>
         </li>
     </ul>
-
 </nav>
