@@ -112,6 +112,30 @@
             </div>
         </div>
 
+        <!-- Pre-Order Items -->
+        <div class="col-xl-3 col-md-6">
+            <div class="card text-white bg-warning h-100 shadow-sm position-relative">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <i class="fas fa-clock fa-2x"></i>
+                    <div>
+                        <div class="fw-semibold">Pre-Order Items</div>
+                            <div class="fs-2 fw-bold">
+                                {{ number_format(\App\Models\Preorder::count() ?? 0) }}
+                            </div>
+                        <small class="text-white-50">User pre-order request</small>
+                    </div>
+                </div>
+
+ <!-- ✅ CLICKABLE -->
+        <div class="card-footer bg-transparent border-0 text-end">
+            <a href="{{ route('admin.preorders.index') }}"
+               class="small text-dark fw-semibold stretched-link">
+                View Pre-Orders →
+            </a>
+        </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Charts -->

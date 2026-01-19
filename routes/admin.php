@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\{
     SettingsController,
     OrderController
 };
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\PreorderController;
 
 Route::prefix('admin')
     ->middleware(['auth', AdminMiddleware::class])
@@ -47,4 +49,12 @@ Route::prefix('admin')
     // Admin Settings
     Route::get('settings', [SettingsController::class, 'index'])->name('settings');
     Route::post('settings/update', [SettingsController::class, 'update'])->name('settings.update');
+
+    // Notifications
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('notifications/{id}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+
+    // Preorders
+    Route::get('preorders', [PreorderController::class, 'index'])->name('preorders.index');
+    Route::post('notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
 });

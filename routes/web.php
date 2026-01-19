@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\FrontendController;
-
+use App\Http\Controllers\Admin\PreorderController;
 /*
 |--------------------------------------------------------------------------
 | Public Routes
@@ -54,6 +54,14 @@ Route::get('/terms-and-conditions', fn () => view('terms-and-conditions'));
 | Other Route Files
 |--------------------------------------------------------------------------
 */
+
+
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/preorders', [App\Http\Controllers\Admin\PreorderController::class, 'index'])
+        ->name('admin.preorders.index');
+});
+
+
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

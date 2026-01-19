@@ -5,6 +5,12 @@ use App\Models\Cart;
 use App\Models\Wishlist;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Order;
+use App\Observers\UserObserver;
+use App\Observers\ProductObserver;
+use App\Observers\OrderObserver;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -17,11 +23,11 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
+     /**
+      * Bootstrap any application services.
+      */
+     public function boot(): void
+     {
         // Share cart count with all views so navbar can display live indicator
         View::composer('*', function ($view) {
             $count = 0;
@@ -34,5 +40,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('cartCount', $count)->with('wishlistCount', $wishlistCount);
 
         });
+
+        // Register model observers for automatic notifications
+        User::observe(UserObserver::class);
+        Product::observe(ProductObserver::class);
+        Order::observe(OrderObserver::class);
     }
 }

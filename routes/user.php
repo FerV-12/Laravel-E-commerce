@@ -10,6 +10,7 @@ use App\Http\Controllers\User\{
     WishlistController,
     CheckoutController,
     SettingsController
+    ,PreorderController
 };
 
 Route::prefix('user')
@@ -68,5 +69,11 @@ Route::prefix('user')
     Route::get('settings', [SettingsController::class, 'index'])->name('settings');
     Route::post('settings/update', [SettingsController::class, 'update'])->name('settings.update');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Preorders
+    |--------------------------------------------------------------------------
+    */
+    Route::post('preorders', [PreorderController::class, 'store'])->name('preorders.store');
 
 });

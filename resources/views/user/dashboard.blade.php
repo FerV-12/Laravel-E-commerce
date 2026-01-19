@@ -11,15 +11,11 @@
         overflow: hidden;
         display: flex;
         align-items: center;
-
-        /* Image handling */
-        /* background-image: url('{{ asset('assets/images/ecombanner.jpg') }}'); */
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
     }
 
-    /* Dark overlay for readability */
     .hero-overlay {
         position: absolute;
         inset: 0;
@@ -32,7 +28,6 @@
         z-index: 1;
     }
 
-    /* Content */
     .hero-content {
         position: relative;
         z-index: 2;
@@ -41,17 +36,10 @@
     }
 
     @keyframes fadeUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Soft light movement (premium feel) */
     .hero-banner::after {
         content: '';
         position: absolute;
@@ -62,22 +50,16 @@
     }
 
     @keyframes glowMove {
-        from {
-            transform: translateX(-10%);
-        }
-        to {
-            transform: translateX(10%);
-        }
+        from { transform: translateX(-10%); }
+        to { transform: translateX(10%); }
     }
 </style>
 
-
 <div class="container py-4">
 
-    <!-- ================= HERO SECTION ================= -->
+    <!-- ================= HERO ================= -->
     <div class="hero-banner rounded mb-5 shadow">
         <div class="hero-overlay"></div>
-
         <div class="hero-content p-5 text-white">
             <h1 class="fw-bold mb-3">
                 Welcome back, {{ auth()->user()->name ?? 'User' }} 👋
@@ -116,34 +98,32 @@
         </div>
     </div>
 
-    <!-- ================= SEARCH & FILTER ================= -->
+    <!-- ================= SEARCH ================= -->
     <div class="card mb-4 shadow-sm border-0">
         <div class="card-body">
-           <form method="GET" action="{{ route('user.products.index') }}">
-    <div class="row g-2">
-        <div class="col-md-7">
-            <input type="text" name="search"
-                   class="form-control"
-                   placeholder="Search premium products..."
-                   value="{{ request('search') }}">
-        </div>
-        <div class="col-md-3">
-            <select class="form-select" name="category">
-                <option value="">All Categories</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" 
-                        {{ request('category') == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-success w-100">Search</button>
-        </div>
-    </div>
-</form>
-
+            <form method="GET" action="{{ route('user.products.index') }}">
+                <div class="row g-2">
+                    <div class="col-md-7">
+                        <input type="text" name="search" class="form-control"
+                               placeholder="Search premium products..."
+                               value="{{ request('search') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" name="category">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ request('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success w-100">Search</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -155,7 +135,7 @@
 
         @foreach($products as $product)
         <div class="col-md-3 mb-4">
-            <div class="card h-100 border-0 product-card position-relative shadow-sm">
+            <div class="card h-100 border-0 shadow-sm position-relative">
 
                 @php
                     $img = $product->image
@@ -165,13 +145,10 @@
                         : asset('assets/images/placeholder.png');
                 @endphp
 
-                @if($product->original_price && $product->original_price > $product->selling_price)
-                    <!-- <div class="discount-badge">SALE</div> -->
-                @endif
-
                 <!-- Wishlist -->
-                <div class="position-absolute top-0 end-0 p-2 wishlist-btn">
-                    <button class="btn btn-sm btn-light shadow-sm wishlist-toggle" data-product-id="{{ $product->id }}">
+                <div class="position-absolute top-0 end-0 p-2">
+                    <button class="btn btn-sm btn-light shadow-sm wishlist-toggle"
+                            data-product-id="{{ $product->id }}">
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
@@ -181,14 +158,12 @@
 
                 <div class="card-body d-flex flex-column">
 
-                    @if($product->quantity <= 0)
-                        <div class="alert alert-warning" role="alert">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            Sorry, this item is currently out of stock. We will notify you once it has been restocked.
-                        </div>
-                    @endif
+                        @if($product->quantity <= 0)
+                            <span class="badge bg-warning text-dark mb-2">
+                            Out of Stock
+                        </span>
+                        @endif
 
-                    
                     <h6 class="fw-semibold mb-1">
                         {{ \Illuminate\Support\Str::limit($product->name, 40) }}
                     </h6>
@@ -202,27 +177,36 @@
                     </p>
 
                     <p class="mb-3">
-                        <strong class="fs-6" @if($product->quantity <= 0) style="color:gray;" @else class="text-success" @endif>
+                        <strong class="fs-6 {{ $product->quantity <= 0 ? 'text-secondary' : 'text-success' }}">
                             &#8369;{{ number_format($product->selling_price, 2) }}
                         </strong>
                         @if($product->original_price)
                             <span class="text-muted small text-decoration-line-through ms-1">
-                        
                                 &#8369;{{ number_format($product->original_price, 2) }}
                             </span>
                         @endif
                     </p>
 
-                    <form action="{{ url('user/cart/add') }}" method="POST" class="mt-auto">
+                    <form class="mt-auto">
                         @csrf
- 
-
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
+
                         @if($product->quantity <= 0)
-                            <button class="btn btn-outline-secondary w-100 fw-semibold" disabled>Out of Stock</button>
+                            <!-- PRE-ORDER -->
+                            <button type="button"
+                                    class="btn btn-outline-warning w-100 fw-semibold preorder-btn"
+                                    data-product-id="{{ $product->id }}"
+                                    data-product-name="{{ $product->name }}">
+                                <i class="fas fa-clock me-1"></i> Pre-order
+                            </button>
                         @else
-                            <button class="btn btn-success w-100 fw-semibold">Add to Cart</button>
-                       @endif
+                            <!-- ADD TO CART -->
+                            <button type="submit"
+                                    formaction="{{ url('user/cart/add') }}"
+                                    class="btn btn-success w-100 fw-semibold">
+                                Add to Cart
+                            </button>
+                        @endif
                     </form>
 
                 </div>
@@ -242,57 +226,68 @@
 @endsection
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const wishlistButtons = document.querySelectorAll('.wishlist-toggle');
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+document.addEventListener('DOMContentLoaded', function () {
 
-        wishlistButtons.forEach(button => {
-            const productId = button.dataset.productId;
-            const icon = button.querySelector('i');
+        // Open preorder modal with selected product
+        const preorderModalEl = document.createElement('div');
 
-            // Attach click handler to toggle wishlist via AJAX
-            button.addEventListener('click', function (e) {
-                e.preventDefault();
+        document.querySelectorAll('.preorder-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                        const pid = this.getAttribute('data-product-id');
+                        const pname = this.getAttribute('data-product-name') || '';
 
-                fetch("{{ url('user/wishlist/toggle') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ product_id: productId })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        const wishlisted = data.action === 'added';
-                        if (wishlisted) {
-                            icon.classList.remove('fa-regular');
-                            icon.classList.add('fa-solid');
+                        // Fill modal fields
+                        document.getElementById('preorder_product_id').value = pid;
+                        document.getElementById('preorder_product_name').textContent = pname;
 
-                        } else {
-                            icon.classList.remove('fa-solid');
-                            icon.classList.add('fa-regular');
-                        }
-
-                        // Update wishlist badge in navbar if present
-                        const badge = document.querySelector('a[href="{{ route('user.wishlist.index') }}"] .badge') || document.querySelector('.navbar .badge.bg-danger');
-                        if (badge) {
-                            badge.textContent = data.count;
-                            if (parseInt(data.count) > 0) {
-                                badge.style.display = 'inline-block';
-                            } else {
-                                badge.style.display = 'none';
-                            }
-                        }
-                    // Redirect to wishlist page after successful toggle
-                    window.location.href = "{{ route('user.wishlist.index') }}";
-                    }
-                }).catch(err => {
-                    console.error('Wishlist toggle error', err);
+                        // Show bootstrap modal
+                        const modalEl = document.getElementById('preorderModal');
+                        const bsModal = new bootstrap.Modal(modalEl);
+                        bsModal.show();
                 });
-            });
         });
-    });
+
+});
 </script>
+
+<!-- Preorder Modal -->
+<div class="modal fade" id="preorderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('user.preorders.store') }}">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="preorderModalLabel">Pre-order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="product_id" id="preorder_product_id">
+
+                    <div class="mb-3">
+                        <label class="form-label">Product</label>
+                        <div id="preorder_product_name" class="fw-semibold"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" name="quantity" class="form-control" value="1" min="1" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Contact phone (optional)</label>
+                        <input type="text" name="contact_phone" class="form-control" placeholder="09xxxxxxxxx">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Note (optional)</label>
+                        <textarea name="note" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit Pre-order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
